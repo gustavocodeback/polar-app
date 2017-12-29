@@ -24,6 +24,17 @@
 
 <ion-footer color="dark">
   <ion-toolbar color="dark">
-    <input class="msg-input" type="text">
+    <textarea class="msg-input"
+              id="messageBox"
+              [rows]="rows"
+              (keyup)="contarLinhas()"
+              [(ngModel)]="message"
+              placeholder="Digite aqui..." 
+              type="text"></textarea>
+    <ion-buttons end>
+      <button (click)="enviarMensagem()" ion-button icon-only>
+        <ion-icon name="send"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-footer>

@@ -1,13 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the ChatPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-chat',
@@ -15,11 +8,33 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ChatPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  /**
+   * Mensagem
+   * 
+   */
+  public message: string = '';
+
+  public rows = 1;
+
+  /**
+   * Método constructor
+   * 
+   * @param navCtrl 
+   * @param navParams 
+   */
+  constructor(  public navCtrl: NavController, 
+                public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ChatPage');
+  contarLinhas() {
+    let parts = this.message.split( /\r*\n/ );
+    let count = parts.length;
+    this.rows = count < 5 ? count : 5;    
   }
 
+  enviarMensagem() {
+    console.log( this.message );
+  }
 }
+
+// End of file
