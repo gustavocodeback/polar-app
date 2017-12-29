@@ -1,3 +1,45 @@
 page-home {
+    .h-list {
+        padding: 5px;
 
+        .h-list-title {
+            color: #e6e6e6;
+            padding: 5px;
+        }
+        .h-list-content {
+            padding-top: 10px;
+            white-space:nowrap;
+            overflow-x: scroll;
+
+            .h-item {
+                display: inline-block;
+                position: relative;
+                width: 70px;
+                margin: 0px 5px;
+
+                .h-desc {
+                    color: #A8A0D4;
+                    padding-top: 5px;
+                    text-align: center;
+                    width: 100%;
+                    display: block;
+                }
+
+                .h-img-item {
+                    border: 5px solid #A8A0D4;
+                    border-radius: 50%;
+                    overflow: hidden;
+                    height: 70px;
+                    width: 70px;
+                    
+                    img {
+                        border-radius: 50%;
+                        height: 50px;
+                        width: 50px;
+                        margin: 5px;
+                    }
+                }
+            }
+        }
+    }
 }

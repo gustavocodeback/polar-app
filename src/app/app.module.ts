@@ -1,3 +1,4 @@
+import { LoginPage } from './../pages/login/login';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
@@ -27,6 +28,7 @@ firebase.initializeApp( config );
   declarations: [
     MyApp,
     HomePage,
+    LoginPage
   ],
   imports: [
     BrowserModule,
@@ -36,6 +38,7 @@ firebase.initializeApp( config );
   entryComponents: [
     MyApp,
     HomePage,
+    LoginPage
   ],
   providers: [
     StatusBar,

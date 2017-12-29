@@ -1,0 +1,21 @@
+<ion-content class="dark-bg" padding>
+  <div class="lds-css ng-scope">
+    <div style="width:100%;height:100%; margin-left: calc( 50% - 100px );" class="lds-double-ring">
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+
+
+  <span class="status-bar">Meu status</span>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="dark">
+    <div class="progress-outer">
+      <div class="progress-inner" [style.width]="progress + '%'">
+        {{progress}}%
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer>

@@ -1,11 +1,29 @@
 <ion-content class="dark-bg">
+
+  <div class="h-list">
+    <div class="h-list-title">Popular</div>
+    <div class="h-list-content">
+      <div class="h-item" *ngFor="let i of [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 ]">
+        <div class="h-img-item">
+          <img src="https://ionicframework.com/dist/preview-app/www/assets/img/avatar-ts-woody.png">
+        </div>
+        <span class="h-desc">Woody</span>
+      </div>
+    </div>
+  </div><!-- lista horizontal -->
+
   <ion-list>
     <ion-item (click)="openChat()" color="dark">
       <ion-avatar item-start>
         <img src="https://ionicframework.com/dist/preview-app/www/assets/img/avatar-ts-woody.png">
       </ion-avatar>
-      <h2>Cher</h2>
-      <p>Ugh. As if.</p>
+      <h2>
+        Cher
+        <small float-right>55 min</small>
+      </h2>
+      <p>
+        Olá gente!
+      </p>
     </ion-item>
   </ion-list>
 

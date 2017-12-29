@@ -1,0 +1,112 @@
+page-login {
+  @keyframes fade-in-fade-out {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes lds-double-ring {
+    0% {
+      -webkit-transform: rotate(0);
+      transform: rotate(0);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  @-webkit-keyframes lds-double-ring {
+    0% {
+      -webkit-transform: rotate(0);
+      transform: rotate(0);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes lds-double-ring_reverse {
+    0% {
+      -webkit-transform: rotate(0);
+      transform: rotate(0);
+    }
+    100% {
+      -webkit-transform: rotate(-360deg);
+      transform: rotate(-360deg);
+    }
+  }
+  @-webkit-keyframes lds-double-ring_reverse {
+    0% {
+      -webkit-transform: rotate(0);
+      transform: rotate(0);
+    }
+    100% {
+      -webkit-transform: rotate(-360deg);
+      transform: rotate(-360deg);
+    }
+  }
+  .lds-double-ring {
+    position: relative;
+  }
+  .lds-double-ring div {
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    top: 20px;
+    left: 20px;
+    border-radius: 50%;
+    border: 8px solid #000;
+    border-color: #5f2a62 transparent #5f2a62 transparent;
+    -webkit-animation: lds-double-ring 4.4s linear infinite;
+    animation: lds-double-ring 4.4s linear infinite;
+  }
+  .lds-double-ring div:nth-child(2) {
+    width: 120px;
+    height: 120px;
+    top: 40px;
+    left: 40px;
+    border-color: transparent #a976c3 transparent #a976c3;
+    -webkit-animation: lds-double-ring_reverse 4.4s linear infinite;
+    animation: lds-double-ring_reverse 4.4s linear infinite;
+  }
+  .lds-double-ring {
+    width: 200px !important;
+    height: 200px !important;
+    -webkit-transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+    transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+  }
+
+  .status-bar {
+    animation: fade-in-fade-out 2s linear infinite;
+    color: #e6e6e6;
+    text-align: center;
+    width: 100%;
+    display: block;
+    margin-top: 100px;
+    font-size: 15px;
+  }
+
+  .progress-outer {
+    width: 96%;
+    margin: 10px 2%;
+    padding: 3px;
+    text-align: center;
+    background-color: #5f2a62;
+    color: #fff;
+    border-radius: 20px;
+}
+
+.progress-inner {
+    min-width: 15%;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 5px;
+    border-radius: 20px;
+    background-color: #a976c3;
+}
+}
