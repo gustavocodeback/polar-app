@@ -1,0 +1,8 @@
+{
+  "name": "polar-app",
+  "app_id": "0e9e31ba",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
