@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { NativePageTransitions } from '@ionic-native/native-page-transitions';
-
+import { Geolocation } from '@ionic-native/geolocation';
 
 // Página
 import { HomePage } from '../pages/home/home';
@@ -46,6 +46,7 @@ firebase.initializeApp( config );
   providers: [
     StatusBar,
     SplashScreen,
+    Geolocation,
     Facebook,
     NativePageTransitions,
     AuthProvider,
