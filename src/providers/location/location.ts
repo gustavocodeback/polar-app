@@ -10,7 +10,7 @@ export class LocationProvider {
    * Pega a posicao atual do usuario
    * 
    */
-  getCurrentPosition() {
+  getCurrentPosition(): any {
     return new Promise( ( resolve, reject ) => {
       this.geolocation.getCurrentPosition() 
       .then( pos  => {
@@ -47,7 +47,16 @@ export class LocationProvider {
             }
           });
       })
+      .catch( err => reject( 'Falha no geocoder!' ) );
     });
+  }
+
+  /**
+   * Vigia a posicao do usuario
+   * 
+   */
+  watchPosition() {
+    return this.geolocation.watchPosition();
   }
 }
 

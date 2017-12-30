@@ -1,13 +1,15 @@
+import { Nav } from 'ionic-angular/components/nav/nav';
 import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 import { LoginPage } from './../pages/login/login';
-import { Component } from '@angular/core';
-import { Platform, NavController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import * as firebase from 'firebase';
+import { GeoFireProvider } from '../providers/geo-fire/geo-fire';
 
 @Component({
-  templateUrl: 'app.html'
+  templateUrl: 'app.html',
 })
 export class MyApp {
 
@@ -15,6 +17,12 @@ export class MyApp {
    * Pagina inicial
    */
   rootPage:any = LoginPage;
+
+  /**
+   * Seta o viewchild
+   * 
+   */
+  @ViewChild(Nav) nav: Nav;
 
   /**
    * Método constructor
@@ -26,7 +34,7 @@ export class MyApp {
    */
   constructor(  platform: Platform, 
                 statusBar: StatusBar,
-                public navCtrl: NavController,
+                geoFire: GeoFireProvider,
                 nativePageTransitions: NativePageTransitions,
                 splashScreen: SplashScreen ) {
 
@@ -49,15 +57,17 @@ export class MyApp {
           };
         nativePageTransitions.fade(options); 
       }
-    });
 
-    // Seta o firebase
-    firebase.auth().onAuthStateChanged( user => {
+      // Seta o firebase
+      firebase.auth().onAuthStateChanged( user => {
 
-      // Verifica se existe o usuário
-      if ( !user ) {
-        this.navCtrl.setRoot( LoginPage );
-      }
+        // Verifica se existe o usuário
+        if ( !user ) {
+          this.nav.setRoot( LoginPage );
+        } else {
+          geoFire.setUserPosition();
+        }
+      });
     });
   }
 }

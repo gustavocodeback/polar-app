@@ -15,6 +15,7 @@ import * as firebase from 'firebase';
 import { Facebook } from '@ionic-native/facebook';
 import { AuthProvider } from '../providers/auth/auth';
 import { LocationProvider } from '../providers/location/location';
+import { GeoFireProvider } from '../providers/geo-fire/geo-fire';
 
 // Inicializa o firebase
 const config = {
@@ -52,7 +53,8 @@ firebase.initializeApp( config );
     AuthProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
-    LocationProvider
+    LocationProvider,
+    GeoFireProvider
   ]
 })
 export class AppModule {}

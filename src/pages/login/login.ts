@@ -3,7 +3,6 @@ import { LocationProvider } from './../../providers/location/location';
 import { AuthProvider } from './../../providers/auth/auth';
 import { Component } from '@angular/core';
 import { NavController, NavParams, Platform } from 'ionic-angular';
-import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions';
 
 @Component({
   selector: 'page-login',
@@ -35,6 +34,11 @@ export class LoginPage {
    * 
    */
   profilePicture;
+
+  /**
+   * Foto de perfil temporária
+   * 
+   */
   tempUrl;
 
   /**
@@ -43,12 +47,11 @@ export class LoginPage {
    * @param navCtrl 
    * @param navParams 
    */
-  constructor(  public navCtrl: NavController,
-                public locationProvider: LocationProvider,
+  constructor(  public platform: Platform,
+                public navParams: NavParams,
+                public navCtrl: NavController,
                 public authProvider: AuthProvider,
-                public platform: Platform,
-                public nativePageTransitions: NativePageTransitions,
-                public navParams: NavParams ) {
+                public locationProvider: LocationProvider ) {
   }
 
   /**
@@ -94,31 +97,56 @@ export class LoginPage {
   }
 
   /**
+   * Acelera o spinner
+   * 
+   */
+  accelarate() {
+    return new Promise( ( resolve, reject ) => {
+      const interval = setInterval( () => {
+        this.animationInterval -= 0.1;
+        if ( this.animationInterval <= 0 ) {
+          resolve( true );
+          clearInterval( interval );
+        }
+      }, 40);
+    });
+  }
+
+  /**
+   * Reduz o spinner
+   * 
+   */
+  reduce() {
+    return new Promise( ( resolve, reject ) => {
+      const interval = setInterval( () => {
+        this.animationInterval += 0.1;
+        if ( this.animationInterval >= 4 ) {
+          resolve( true );
+          clearInterval( interval );
+        }
+      }, 40);
+    });
+  }
+
+  /**
    * Animacao depois que o login for feito
    * 
    */
-  animateAfterLogin() {
+  async animateAfterLogin() {
     this.progressTo( 80 );
-    const interval = setInterval( () => {
-      this.animationInterval -= 0.05;
-      if ( this.animationInterval <= 0 ) {
-        clearInterval( interval );
+    await this.accelarate();
 
-        // Seta a url da fotoa
-        this.profilePicture = this.tempUrl;
-        let name = this.authProvider.user().displayName;
+    // Seta a url da fotoa
+    this.profilePicture = this.tempUrl;
+    let name = this.authProvider.user().displayName;
+    await this.reduce();
 
-        // Seta o nome de display
-        name = name ? name : this.authProvider.user().email;
-        this.message = `Bem-vindo, ${name}`;
+    // Seta o nome de display
+    name = name ? name : this.authProvider.user().email;
+    this.message = `Bem-vindo, ${name}`;
 
-        // Seta o progresso
-        this.progress = 80;
-
-        // Pega a localização
-        this.getLocation();
-      }
-    }, 40 );
+    // Pega a localização
+    this.getLocation();
   }
 
   /**
@@ -132,6 +160,7 @@ export class LoginPage {
 
       // Pega o endereço
       const address = await this.locationProvider.getCurrentAddress();
+      console.log( address );
       this.message  = address;      
     } catch (error) {
       this.message = 'Não conseguimos obter sua localização.';      

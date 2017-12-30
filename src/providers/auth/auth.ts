@@ -1,6 +1,6 @@
+import * as firebase from 'firebase';
 import { Injectable } from '@angular/core';
 import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
-import * as firebase from 'firebase';
 
 @Injectable()
 export class AuthProvider {
@@ -13,10 +13,25 @@ export class AuthProvider {
   constructor( public facebook: Facebook ) {}
 
   /**
+   * Seta o perfil do usuário
+   * 
+   */
+  setProfile() {
+    const user = this.user();
+    if ( !user ) return;
+    const data = {
+      displayName: user.displayName,
+      email: user.email,
+      phoneNumber: user.phoneNumber,
+      photoURL: user.photoURL
+    };
+    firebase.database().ref( `users/${user.uid}` ).set( data );
+  }
+  /**
    * Pega o usuário logado
    * 
    */
-  public user() {
+  user() {
 
     // pega o usuario atual
     const user = Object.keys( window.localStorage )
@@ -32,7 +47,7 @@ export class AuthProvider {
    * Faz login com o Facebook
    * 
    */
-  public login() {
+  login() {
     return new Promise( ( resolve, reject ) => {
 
       // Verifica se já não existe um usuário logado
@@ -50,7 +65,10 @@ export class AuthProvider {
   
         // Faz o login com o firebase
         firebase.auth().signInWithCredential( facebookCredential )
-        .then( success => resolve( this.user() ) )
+        .then( success => {
+          this.setProfile();
+          resolve( this.user() );
+        })
         .catch( e => reject( e ) );
       })
       .catch( e => reject( e ) );
@@ -61,7 +79,7 @@ export class AuthProvider {
    * Faz o logout do sistema
    * 
    */
-  public logout() {
+  logout() {
     return firebase.auth().signOut();
   }
 }
