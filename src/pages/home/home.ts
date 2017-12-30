@@ -12,12 +12,17 @@ export class HomePage {
                 public auth: AuthProvider ) {
   }
 
-  doLogin() {
-    this.auth.login();
-  }
 
   openChat() {
     this.navCtrl.push( 'ChatPage' );
+  }
+
+  /**
+   * Faz o logout do sistema
+   * 
+   */
+  doLogout() {
+    this.auth.logout();
   }
 }
 

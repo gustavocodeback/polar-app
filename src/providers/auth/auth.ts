@@ -56,6 +56,14 @@ export class AuthProvider {
       .catch( e => reject( e ) );
     });
   }
+
+  /**
+   * Faz o logout do sistema
+   * 
+   */
+  public logout() {
+    return firebase.auth().signOut();
+  }
 }
 
 // End of file

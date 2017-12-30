@@ -52,6 +52,19 @@ export class LoginPage {
   }
 
   /**
+   * Verifica se pode entrar
+   * 
+   */
+  ionViewCanEnter(){
+    if ( this.authProvider.user() ) {
+      setTimeout(() => {
+        this.navCtrl.setRoot( HomePage );
+      }, 0);
+      return false;
+    } else return true;
+  }
+
+  /**
    * Faz a progressao do progress bar
    * 
    * @param num 
@@ -124,18 +137,8 @@ export class LoginPage {
       this.message = 'Não conseguimos obter sua localização.';      
     }
     await this.progressTo( 100 );    
-      const options: NativeTransitionOptions = {
-        direction: 'up',
-        duration: 500,
-        slowdownfactor: 3,
-        slidePixels: 20,
-        iosdelay: 100,
-        androiddelay: 150,
-        fixedPixelsTop: 0,
-        fixedPixelsBottom: 60
-        };
-      this.nativePageTransitions.fade(options);       
-      this.navCtrl.setRoot( HomePage );
+          
+    this.navCtrl.setRoot( HomePage );
   }
 
   /**
