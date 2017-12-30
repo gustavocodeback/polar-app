@@ -16,6 +16,7 @@ import { Facebook } from '@ionic-native/facebook';
 import { AuthProvider } from '../providers/auth/auth';
 import { LocationProvider } from '../providers/location/location';
 import { GeoFireProvider } from '../providers/geo-fire/geo-fire';
+import { UsersProvider } from '../providers/users/users';
 
 // Inicializa o firebase
 const config = {

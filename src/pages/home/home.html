@@ -1,13 +1,13 @@
 <ion-content class="dark-bg">
 
   <div class="h-list">
-    <div class="h-list-title">Popular</div>
+    <div class="h-list-title">Usuário próximos</div>
     <div class="h-list-content">
-      <div class="h-item" *ngFor="let i of [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 ]">
+      <div class="h-item" *ngFor="let user of nearbyUsers">
         <div class="h-img-item">
-          <img src="https://ionicframework.com/dist/preview-app/www/assets/img/avatar-ts-woody.png">
+          <img [src]="user.photoURL">
         </div>
-        <span class="h-desc">Woody</span>
+        <span text-wrap class="h-desc">{{ user.displayName ? user.displayName : user.email }}</span>
       </div>
     </div>
   </div><!-- lista horizontal -->

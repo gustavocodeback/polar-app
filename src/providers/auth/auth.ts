@@ -12,21 +12,7 @@ export class AuthProvider {
    */
   constructor( public facebook: Facebook ) {}
 
-  /**
-   * Seta o perfil do usuário
-   * 
-   */
-  setProfile() {
-    const user = this.user();
-    if ( !user ) return;
-    const data = {
-      displayName: user.displayName,
-      email: user.email,
-      phoneNumber: user.phoneNumber,
-      photoURL: user.photoURL
-    };
-    firebase.database().ref( `users/${user.uid}` ).set( data );
-  }
+  
   /**
    * Pega o usuário logado
    * 
@@ -34,13 +20,34 @@ export class AuthProvider {
   user() {
 
     // pega o usuario atual
-    const user = Object.keys( window.localStorage )
-                  .filter( item => item.startsWith( 'firebase:authUser' ) )[0];
+    const user = Object.keys( window.localStorage ).filter( item => item.startsWith( 'firebase:authUser' ) )[0];
 
     // verifica se existe um usuario
     if ( user ) {
       return JSON.parse( localStorage.getItem( user ) );
     } else return false;
+  }
+
+  /**
+   * Seta o perfil do usuário
+   * 
+   */
+  setProfile() {
+
+    // Verifica o usuario
+    const user = this.user();
+    if ( !user ) return;
+
+    // Seta os dados do perfil
+    const data = {
+      displayName: user.displayName,
+      email: user.email,
+      phoneNumber: user.phoneNumber,
+      photoURL: user.photoURL
+    };
+
+    // Grava o item no firebase
+    firebase.database().ref( `users/${user.uid}` ).set( data );
   }
 
   /**
@@ -69,9 +76,9 @@ export class AuthProvider {
           this.setProfile();
           resolve( this.user() );
         })
-        .catch( e => reject( e ) );
+        .catch( e => reject( 'Erro ao logar com o Facebook.' ) );
       })
-      .catch( e => reject( e ) );
+      .catch( e => reject( 'Erro ao logar com o Facebook.' ) );
     });
   }
 
