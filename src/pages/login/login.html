@@ -1,21 +1,27 @@
 <ion-content class="dark-bg" padding>
   <div class="lds-css ng-scope">
     <div style="width:100%;height:100%; margin-left: calc( 50% - 100px );" class="lds-double-ring">
-      <div></div>
-      <div></div>
+      <div class="item" [style.animation]="getAnimation()"></div>
+      <div class="item" [style.animation]="getAnimation( true )"></div>
+      <div *ngIf="profilePicture" class="image-wrapper">
+        <img [src]="profilePicture">
+      </div>
     </div>
   </div>
 
-
-  <span class="status-bar">Meu status</span>
+  <span class="status-bar">{{ message }}</span>
 </ion-content>
 
 <ion-footer>
   <ion-toolbar color="dark">
-    <div class="progress-outer">
+    <div *ngIf="progress > 0" class="progress-outer">
       <div class="progress-inner" [style.width]="progress + '%'">
-        {{progress}}%
+        {{progress | number : '1.1-1' }}%
       </div>
     </div>
+
+    <button *ngIf="progress == 0" (click)="doLogin()" block round ion-button color="dark">
+      Toque aqui para entrar
+    </button>
   </ion-toolbar>
 </ion-footer>

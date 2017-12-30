@@ -3,6 +3,8 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+import { NativePageTransitions } from '@ionic-native/native-page-transitions';
+
 
 // Página
 import { HomePage } from '../pages/home/home';
@@ -12,6 +14,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import * as firebase from 'firebase';
 import { Facebook } from '@ionic-native/facebook';
 import { AuthProvider } from '../providers/auth/auth';
+import { LocationProvider } from '../providers/location/location';
 
 // Inicializa o firebase
 const config = {
@@ -44,9 +47,11 @@ firebase.initializeApp( config );
     StatusBar,
     SplashScreen,
     Facebook,
+    NativePageTransitions,
     AuthProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthProvider
+    AuthProvider,
+    LocationProvider
   ]
 })
 export class AppModule {}
